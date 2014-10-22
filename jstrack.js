@@ -122,7 +122,7 @@ function jstrack(param) {
     // method: set's the directions obtaining mode for snap to road feature
     this.setSnapToRoadMode = function(mode) {
         if (mode == 'driving' || mode == 'bicycling' || mode == 'walking') {
-            settings.snapToRoadMode = snapToRoadTypes[mode];
+            settings.snapToRoadMode = mode;
         } else {
             throw new Error('Invalid snapToRoad mode');
         }
@@ -206,8 +206,6 @@ function jstrack(param) {
             jstrack.setPathPoints(settings.points);
         }
 
-        console.log(settings.editable);
-
         // editor track line settings
         var polyLineOptions = {
             path: path,
@@ -228,7 +226,7 @@ function jstrack(param) {
                 dservice.route({
                     origin: path.getAt(path.getLength() - 1),
                     destination: event.latLng,
-                    travelMode: settings.snapToRoadMode
+                    travelMode: snapToRoadTypes[settings.snapToRoadMode]
                 }, function(result, status) {
                     if (status == google.maps.DirectionsStatus.OK) {
                         for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {

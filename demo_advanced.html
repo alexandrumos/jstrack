@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>jstrack simple demo</title>
+    <style type="text/css">
+        #points {
+            width: 100%;
+            background: #dddddd;
+            font-family: 'Source Code Pro', Monaco, Consolas, "Lucida Console", monospace;
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body onload="init()">
+    <input type="button" value="Enable snap to road" onclick="enableSnapToRoad()" id="enableSnapToRoad">
+    <input type="button" value="Disable snap to road" onclick="disableSnapToRoad()" id="disableSnapToRoad" style="display: none;">
+    <select id="snapToRoadMode" onchange="changeSnapToRoadMode(this)">
+        <option value="driving" selected="selected">Driving</option>
+        <option value="bicycling">Bicycling</option>
+        <option value="walking">Walking</option>
+    </select>
+
+    <div id="map"></div>
+
+    <input type="button" value="Reset path" onclick="resetPath()">
+
+    <div id="points">
+
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry"></script>
+    <script src="jstrack.js"></script>
+    <script>
+        var track = null;
+        var path = [
+            { lat: 45.665886, lng: 22.421422 },
+            { lat: 45.665136, lng: 22.417946 },
+            { lat: 45.665136, lng: 22.415843 },
+            { lat: 45.666846, lng: 22.411423 },
+            { lat: 45.666696, lng: 22.407818 },
+            { lat: 45.667295, lng: 22.405715 },
+            { lat: 45.666036, lng: 22.402754 },
+            { lat: 45.666336, lng: 22.401037 },
+            { lat: 45.666156, lng: 22.397990 },
+            { lat: 45.663876, lng: 22.391467 },
+            { lat: 45.662467, lng: 22.390008 },
+            { lat: 45.662617, lng: 22.388549 },
+            { lat: 45.662467, lng: 22.387090 }
+        ];
+
+        function init() {
+
+            track = new jstrack({
+                mapId: 'map',
+                width: 700,
+                height: 500,
+                snapToRoad: false,
+                panControl: false,
+                streetViewControl: false,
+                points: path
+            });
+
+            track.setPathChangeHandler(handlePathChanged);
+
+        }
+
+        function handlePathChanged(points) {
+            var str = JSON.stringify(points);
+
+            document.getElementById('points').innerHTML = str;
+        }
+
+        function enableSnapToRoad() {
+            document.getElementById('enableSnapToRoad').style.display = 'none';
+            document.getElementById('disableSnapToRoad').style.display = 'inline-block';
+
+            track.setSnapToRoad(true);
+        }
+
+        function disableSnapToRoad() {
+            document.getElementById('enableSnapToRoad').style.display = 'inline-block';
+            document.getElementById('disableSnapToRoad').style.display = 'none';
+
+            track.setSnapToRoad(false);
+        }
+
+        function changeSnapToRoadMode(el) {
+            var mode = el.value;
+            track.setSnapToRoadMode(mode);
+        }
+
+        function resetPath() {
+            track.setPathPoints(path);
+        }
+
+    </script>
+</body>
+</html>

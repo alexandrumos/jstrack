@@ -1,6 +1,7 @@
 ![jstrack preview](http://alexandrumos.com/jstrack.png)
 
 # jstrack
+===
 
 ## About
 
@@ -18,7 +19,15 @@ To delete a point right click on it. The editor also supports multi-points delet
 
 ## Usage
 
-The simplest way of using it in a page is by creating a DIV in which the editor will be rendered:
+First load the Google Maps JS API file.
+
+```
+<script src="https://maps.googleapis.com/maps/api/js?libraries=geometry"></script>
+```
+
+More on this: https://developers.google.com/maps/documentation/javascript/tutorial
+
+The simplest way of using the editor in a page is by creating a DIV in which the map and track editor will be rendered:
 
 ```
 <div id="map"></div>
@@ -134,20 +143,6 @@ Returns the current map zoom level.
 var zoomLevel = track.getZoom();
 ```
 
-#### setWidth( width )
-Changes the editor map width.
-
-```javascript
-track.setWidth(1200);
-```
-
-#### setHeight( height )
-Changes the editor map height.
-
-```javascript
-track.setHeight(600);
-```
-
 #### setPathChangeHandler( function )
 This can be used in order to set an external handler for the event which is triggered when something changes with the track into the editor. Events which will trigger calling of the **function** are:
 
@@ -181,7 +176,7 @@ track.setPathChangeHandler(trackChanged);
 An demo showing preety much all the functionalities can be viewed here: http://alexandrumos.com/jstrack
 
 ### Warning
-I'm not an advanced JavaScript developer, this is one of my first object oriented projects made in JavaScript. Also it was tested only on a Mac in Firefox, Google Chrome and Safara. Seems to work fine. If you have anything to report please send it by GitHub **issues**.
+I'm not an advanced JavaScript developer, this is one of my first object oriented projects made in JavaScript. Also it was tested only on a Mac in Firefox, Google Chrome and Safari. Seems to work fine. If you have anything to report please send it by GitHub **issues**.
 
 ### License
 This code is released under MIT license: http://opensource.org/licenses/MIT
