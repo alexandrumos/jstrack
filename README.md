@@ -1,7 +1,7 @@
 ![jstrack preview](http://alexandrumos.com/jstrack.png)
 
 # jstrack
-===
+
 
 ## About
 
@@ -94,7 +94,7 @@ var points = [
     { lat: 45.666036, lng: 22.402754 }
 ]
 
-track.setPathPoints( 45.662467 , 22.387090 );
+track.setPathPoints( points );
 ```
 
 #### getPathPoints()
@@ -173,7 +173,7 @@ track.setPathChangeHandler(trackChanged);
 
 ### Demos
 
-An demo showing preety much all the functionalities can be viewed here: http://alexandrumos.com/jstrack
+Two demos showing preety much all the functionalities can be accessed here: http://alexandrumos.com/jstrack
 
 ### Warning
 I'm not an advanced JavaScript developer, this is one of my first object oriented projects made in JavaScript. Also it was tested only on a Mac in Firefox, Google Chrome and Safari. Seems to work fine. If you have anything to report please send it by GitHub **issues**.
